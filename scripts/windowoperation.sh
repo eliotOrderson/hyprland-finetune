@@ -46,7 +46,6 @@ if [[ ! -z $class && ! -z $exec  && ! -z $workspace ]]; then
 else
 # hide or show active window for only
 	stack_file="/tmp/hide_window_pid_stack.txt"
-	exculde=(floatkitty)
 	function hide_window(){
 		activewindow=$(hyprctl activewindow -j)
 		# Cannot hide thie window. because the window had "float" prefix window class
@@ -62,7 +61,7 @@ else
 
 	function show_window(){
 		pid=$(tail -1 $stack_file)
-		[ -z $pid ] && exit
+		[ -z $pid ] && sed -i '$d' $stack_file && exit
 		current_workspace=$(hyprctl activeworkspace -j | jq '.id')	
 		hyprctl dispatch movetoworkspacesilent $current_workspace,pid:$pid
 		sed -i '$d' $stack_file
@@ -70,9 +69,9 @@ else
 
 	if [ ! -z $1 ];then
 		if [ "$1" == "h" ];then
-			hide_window >> /dev/null
+			hide_window
 		else
-			show_window >> /dev/null
+			show_window
 		fi
 	fi
 

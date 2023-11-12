@@ -6,7 +6,7 @@ windowoperation='~/.config/hypr/scripts/windowoperation.sh'
 remap={
     '$browser = firefox'                             : '$browser = google-chrome-stable',
     '$mainMod, T, exec, $term'                       : '$mainMod, Return, exec, $term',
-    '$mainMod, A, exec, pkill rofi'                  : '$mainMod, D, exec, pkill rofi',
+    '$mainMod, A, exec, pkill -x rofi'               : '$mainMod, D, exec, pkill -x rofi',
     'bind = $mainMod, C, exec, $editor # open vscode': '',
     '$mainMod, F, exec, $browser'                    : f'$mainMod, C, exec, {windowoperation} -c Google-chrome -e $browser -w 8 -m "goto"',
     'ALT, return, fullscreen'                        : '$mainMod, F, fullscreen',
@@ -21,6 +21,7 @@ bind = $mainMod CTRL,down,exec, hyprctl dispatch swapwindow d
 
 # mainMod + \ open float kitty terminal on center
 bind = $mainMod,code:51,exec,[centerwindow 1] {windowoperation} -c 'floatkitty' -e "kitty --class floatkitty" -w 66
+bind = ALT,code:51,exec,[centerwindow 1] {windowoperation} -c 'floatkitty' -e "kitty --class floatkitty" -w 66
 
 # hide window
 bind = $mainMod,H,exec,{windowoperation} h
